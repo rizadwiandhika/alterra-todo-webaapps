@@ -6,7 +6,7 @@
  * Task - React Hooks
  */
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -14,10 +14,21 @@ import Header from '../components/Header/Header'
 import Activities from '../components/Activities/Avtivities'
 import Search from '../components/Seach/Search'
 
+import illustration from '../assets/illustration.svg'
+
 export default function Index(props) {
   const [activities, setActivities] = useState([])
   const [inputNewActivity, setInputNewActivity] = useState('')
   const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    const data = [
+      { id: uuidv4(), activity: 'Write a song', finished: false },
+      { id: uuidv4(), activity: 'Go to guitar lesson', finished: false }
+    ]
+
+    setActivities(data)
+  }, [])
 
   const inputHandler = (event) => {
     setInputNewActivity(event.target.value)
@@ -33,8 +44,6 @@ export default function Index(props) {
       activity: inputNewActivity,
       finished: false
     }
-
-    console.log('adding new activity...')
 
     setActivities([...activities, newActivities])
     setInputNewActivity('')
@@ -80,6 +89,19 @@ export default function Index(props) {
         toggleHandler={toggleHandler}
         deleteHandler={deleteHandler}
       />
+
+      {activities.length === 0 && (
+        <div className="hidden sm:block relative mt-12 opacity-50">
+          <img
+            className="block w-8/12 mx-auto"
+            src={illustration}
+            alt="undraw_empty_street_sfxm"
+          />
+          <p className="absolute top-1/2 left-1/2 transform  -translate-x-1/2 -translate-y-1/2 text-center font-bold text-lg text-gray-800">
+            No activities...
+          </p>
+        </div>
+      )}
     </div>
   )
 }
