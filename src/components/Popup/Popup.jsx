@@ -9,12 +9,12 @@ export default function Popup({ isOpen, togglePopup }) {
           <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
 
           <Transition.Child
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-out duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enter="transition duration-100 ease-out"
+            enterFrom="transform scale-75 opacity-0"
+            enterTo="transform scale-100 opacity-100"
+            leave="transition duration-75 ease-out"
+            leaveFrom="transform scale-100 opacity-100"
+            leaveTo="transform scale-95 opacity-0"
           >
             <div className="relative bg-white rounded max-w-sm mx-auto p-12">
               <Dialog.Title className="font-bold text-lg">
